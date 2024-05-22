@@ -26,8 +26,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.asm_thanghtph31577.R
 import com.example.asm_thanghtph31577.data.Product
@@ -141,8 +144,18 @@ fun ProductItem(index: Int) {
 
             ) {
                 Column (verticalArrangement = Arrangement.Center) {
-                    Text(text = product.name, style = MaterialTheme.typography.labelLarge)
-                    Text(text = "$${product.price}", style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(top = 5.dp))
+                    Text(text = product.name,
+                        color = Color(0xff606060),
+                        fontFamily = FontFamily.Serif,
+                        fontSize = 13.sp
+
+                    )
+                    Text(text = "$${product.price}",
+                        color = Color(0xff303030),
+                        fontFamily = FontFamily.Serif,
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 5.dp))
 
                 }
 
