@@ -1,5 +1,6 @@
 package com.example.asm_thanghtph31577.ui.compose
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,14 +26,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.asm_thanghtph31577.R
+import com.example.asm_thanghtph31577.Screens
 import com.example.asm_thanghtph31577.data.Product
 import com.example.asm_thanghtph31577.data.Products
 
@@ -55,31 +60,38 @@ val productLists = listOf(
 
 val cartList = mutableListOf<Products>()
 
-@Preview
+
 @Composable
-fun ProductSection() {
+fun ProductSection(navControl: NavHostController) {
+
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2), // 2 columns
+        columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp), // Padding around the grid
-        horizontalArrangement = Arrangement.spacedBy(16.dp), // Horizontal spacing between items
-        verticalArrangement = Arrangement.spacedBy(16.dp) // Vertical spacing between items
+        contentPadding = PaddingValues(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(productLists.size) { index ->
-            ProductItem(index)
+            ProductItem(index, navControl)
         }
     }
 }
 
 @Composable
-fun ProductItem(index: Int) {
+fun ProductItem(index: Int, navControl: NavHostController) {
+
+    val context = LocalContext.current
+
     val product = productLists[index]
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(15.dp))
-            .clickable { }
+            .clickable {
+                Toast.makeText(context, "oke",Toast.LENGTH_SHORT).show()
+                navControl.navigate(Screens.ProductDetail.screen)
+            }
             .padding(8.dp),
         contentAlignment = Alignment.Center
     ) {

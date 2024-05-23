@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,13 +27,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.asm_thanghtph31577.Screens
 import com.example.asm_thanghtph31577.ui.compose.CategoriesSection
 import com.example.asm_thanghtph31577.ui.compose.ProductSection
 
-@Preview(showBackground = true)
 @Composable
-fun Home(){
+fun Home(navControl: NavHostController){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,23 +49,31 @@ fun Home(){
             horizontalArrangement =  Arrangement.SpaceBetween
 
         ) {
-            Icon(Icons.Default.Search ,
-                contentDescription = "",
-                modifier = Modifier.size(30.dp),
-            )
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Default.Search ,
+                    contentDescription = "",
+                    modifier = Modifier.size(30.dp),
+                )
+
+            }
+
             Column {
                 Text(text = "Make home", color = Color(0xff909090) )
                 Text(text = "BEAUTIFUL")
 
             }
-            Icon(Icons.Outlined.ShoppingCart,
-                contentDescription = null,
-                modifier = Modifier.size(30.dp))
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Outlined.ShoppingCart,
+                    contentDescription = null,
+                    modifier = Modifier.size(30.dp))
+                
+            }
+
 
         }
 
        CategoriesSection()
-        ProductSection()
+        ProductSection(navControl)
 
     }
 }

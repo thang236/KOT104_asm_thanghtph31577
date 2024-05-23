@@ -172,7 +172,12 @@ fun LoginScreen(navControl: NavHostController) {
                     Text(text = "Forgot Password", color = Color(0xFF303030))
                 }
                 Button(onClick = {
-                    navControl.navigate("home")
+                    navControl.navigate("home"){
+                        popUpTo(navControl.graph.startDestinationId){
+                            inclusive = true
+                        }
+                    }
+
                 },
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),
                     shape = RoundedCornerShape(8.dp)

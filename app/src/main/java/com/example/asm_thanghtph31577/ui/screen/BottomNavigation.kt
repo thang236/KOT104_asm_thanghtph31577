@@ -28,24 +28,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.asm_thanghtph31577.Screens
 
-@Preview(showBackground = true)
 @Composable
-fun BottomNavigation(){
+fun BottomNavigation(navControl: NavHostController){
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        MyBottomAppBar()
+        MyBottomAppBar(navControl)
     }
 }
 
 @Composable
-fun MyBottomAppBar() {
+fun MyBottomAppBar(navControl: NavHostController) {
     val context = LocalContext.current.applicationContext
     val navigationController = rememberNavController()
     val selected = remember {
@@ -63,6 +63,7 @@ fun MyBottomAppBar() {
                     selected.value = Icons.Default.Home
                     navigationController.navigate(Screens.Home.screen){
                         popUpTo(0)
+
                     }
                 },
                     modifier = Modifier.weight(1f)
@@ -143,7 +144,7 @@ fun MyBottomAppBar() {
             startDestination = Screens.Home.screen,
             modifier = Modifier.padding(paddingValues)
             ) {
-            composable(Screens.Home.screen){ Home()}
+            composable(Screens.Home.screen){ Home(navControl)}
             composable(Screens.BookMark.screen){ Favorite() }
             composable(Screens.Notification.screen){ Notification() }
             composable(Screens.Profile.screen){ Profile() }

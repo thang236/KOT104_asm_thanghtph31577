@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.asm_thanghtph31577.ui.screen.BottomNavigation
 import com.example.asm_thanghtph31577.ui.screen.LoginScreen
+import com.example.asm_thanghtph31577.ui.screen.ProductDetail
 import com.example.asm_thanghtph31577.ui.screen.SignUp
 import com.example.asm_thanghtph31577.ui.theme.Asm_thanghtph31577Theme
 import com.example.asm_thanghtph31577.ui.screen.SplashScreen
@@ -47,7 +48,10 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("home") {
-                            BottomNavigation()
+                            BottomNavigation(navControl)
+                        }
+                        composable(Screens.ProductDetail.screen) {
+                            ProductDetail()
                         }
 
 
