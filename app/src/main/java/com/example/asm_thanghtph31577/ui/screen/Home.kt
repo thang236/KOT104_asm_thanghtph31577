@@ -1,5 +1,6 @@
 package com.example.asm_thanghtph31577.ui.screen
 
+import CategoriesSection
 import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,15 +30,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.asm_thanghtph31577.Screens
-import com.example.asm_thanghtph31577.ui.compose.CategoriesSection
+import com.example.asm_thanghtph31577.data.SharedViewModel
 import com.example.asm_thanghtph31577.ui.compose.ProductSection
 
 @Composable
-fun Home(navControl: NavHostController){
+fun Home(navControl: NavHostController, sharedViewModel: SharedViewModel){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 26.dp),
+            .padding(top = 16.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -62,7 +63,7 @@ fun Home(navControl: NavHostController){
                 Text(text = "BEAUTIFUL")
 
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navControl.navigate(Screens.Cart.screen) }) {
                 Icon(Icons.Outlined.ShoppingCart,
                     contentDescription = null,
                     modifier = Modifier.size(30.dp))
@@ -73,7 +74,7 @@ fun Home(navControl: NavHostController){
         }
 
        CategoriesSection()
-        ProductSection(navControl)
+        ProductSection(navControl ,sharedViewModel)
 
     }
 }

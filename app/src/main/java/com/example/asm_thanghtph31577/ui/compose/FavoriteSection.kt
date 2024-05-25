@@ -37,15 +37,17 @@ import com.example.asm_thanghtph31577.data.Products
 
 
 val productList = listOf(
-    Products(1, "Black Simple Lamp", 100.0,  R.drawable.sp1, false),
-    Products(2, "Minimal Stand", 200.0,  R.drawable.sp2, false),
-    Products(3, "Coffee Chair", 300.0,  R.drawable.sp3, false),
-    Products(4, "Simple Desk", 400.0,  R.drawable.sp4, false),
+    Products(1, "Black Simple Lamp", 100.0,  R.drawable.sp1, false,"Ngon lam"),
+    Products(2, "Minimal Stand", 200.0,  R.drawable.sp2, false,"Ngon vl"),
+    Products(3, "Coffee Chair", 300.0,  R.drawable.sp3, false, "re"),
+    Products(4, "Simple Desk", 400.0,  R.drawable.sp4, false,"deu"),
 
-    Products(5, "Black Simple Lamp", 100.0,  R.drawable.sp1, false),
-    Products(6, "Minimal Stand", 200.0,  R.drawable.sp2, false),
-    Products(7, "Coffee Chair", 300.0,  R.drawable.sp3, false),
-    Products(8, "Simple Desk", 400.0,  R.drawable.sp4, false),
+    Products(5, "Black Simple Lamp", 100.0,  R.drawable.sp1, false,"123"),
+    Products(6, "Minimal Stand", 200.0,  R.drawable.sp2, false,"123"),
+    Products(7, "Coffee Chair", 300.0,  R.drawable.sp3, false,"123"),
+    Products(8, "Simple Desk", 400.0,  R.drawable.sp4, false,"123"),
+
+
 
     )
 @Preview(showBackground = true)

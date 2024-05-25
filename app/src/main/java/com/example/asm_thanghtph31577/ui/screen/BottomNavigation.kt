@@ -5,14 +5,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,19 +37,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.asm_thanghtph31577.Screens
+import com.example.asm_thanghtph31577.data.SharedViewModel
+
 
 @Composable
-fun BottomNavigation(navControl: NavHostController){
+fun BottomNavigation(navControl: NavHostController, sharedViewModel: SharedViewModel){
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        MyBottomAppBar(navControl)
+        MyBottomAppBar(navControl, sharedViewModel)
     }
 }
 
 @Composable
-fun MyBottomAppBar(navControl: NavHostController) {
+fun MyBottomAppBar(navControl: NavHostController, sharedViewModel: SharedViewModel) {
     val context = LocalContext.current.applicationContext
     val navigationController = rememberNavController()
     val selected = remember {
@@ -78,7 +84,7 @@ fun MyBottomAppBar(navControl: NavHostController) {
 
                 IconButton(
                     onClick = {
-                        selected.value = Icons.Default.Favorite
+                        selected.value = Icons.Rounded.Bookmark
                         navigationController.navigate(Screens.BookMark.screen){
                             popUpTo(0)
                         }
@@ -86,7 +92,7 @@ fun MyBottomAppBar(navControl: NavHostController) {
                     modifier = Modifier.weight(1f)
                 )
                 {
-                    Icon(if (selected.value == Icons.Default.Favorite) Icons.Default.Favorite else Icons.Outlined.FavoriteBorder,
+                    Icon(if (selected.value == Icons.Rounded.Bookmark) Icons.Rounded.Bookmark  else  Icons.Outlined.BookmarkBorder,
                         contentDescription = "",
                         modifier = Modifier.size(24.dp),
                     )
@@ -144,11 +150,11 @@ fun MyBottomAppBar(navControl: NavHostController) {
             startDestination = Screens.Home.screen,
             modifier = Modifier.padding(paddingValues)
             ) {
-            composable(Screens.Home.screen){ Home(navControl)}
+            composable(Screens.Home.screen){ Home(navControl,sharedViewModel)}
             composable(Screens.BookMark.screen){ Favorite() }
             composable(Screens.Notification.screen){ Notification() }
-            composable(Screens.Profile.screen){ Profile() }
-
+            composable(Screens.Profile.screen){ Profile(navControl, navigationController) }
+            composable(Screens.MyOrder.screen){ MyOrder(navigationController)}
 
         }
 

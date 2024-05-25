@@ -1,5 +1,6 @@
 package com.example.asm_thanghtph31577.ui.compose
 
+import android.os.Bundle
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,6 +20,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,31 +41,29 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.asm_thanghtph31577.R
 import com.example.asm_thanghtph31577.Screens
-import com.example.asm_thanghtph31577.data.Product
 import com.example.asm_thanghtph31577.data.Products
-
+import com.example.asm_thanghtph31577.data.SharedViewModel
 
 
 val productLists = listOf(
-    Products(1, "Black Simple Lamp", 100.0,  R.drawable.sp1, false),
-    Products(2, "Minimal Stand", 200.0,  R.drawable.sp2, false),
-    Products(3, "Coffee Chair", 300.0,  R.drawable.sp3, false),
-    Products(4, "Simple Desk", 400.0,  R.drawable.sp4, false),
+    Products(1, "Black Simple Lamp", 100.0,  R.drawable.sp1, false,"Ngon lam"),
+    Products(2, "Minimal Stand", 200.0,  R.drawable.sp2, false,"Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home."),
+    Products(3, "Coffee Chair", 300.0,  R.drawable.sp3, false, "re"),
+    Products(4, "Simple Desk", 400.0,  R.drawable.sp4, false,"deu"),
 
-    Products(5, "Black Simple Lamp", 100.0,  R.drawable.sp1, false),
-    Products(6, "Minimal Stand", 200.0,  R.drawable.sp2, false),
-    Products(7, "Coffee Chair", 300.0,  R.drawable.sp3, false),
-    Products(8, "Simple Desk", 400.0,  R.drawable.sp4, false),
+    Products(5, "Black Simple Lamp", 100.0,  R.drawable.sp1, false,"123"),
+    Products(6, "Minimal Stand", 200.0,  R.drawable.sp2, false,"123"),
+    Products(7, "Coffee Chair", 300.0,  R.drawable.sp3, false,"123"),
+    Products(8, "Simple Desk", 400.0,  R.drawable.sp4, false,"123"),
 
 
 
 )
 
-val cartList = mutableListOf<Products>()
 
 
 @Composable
-fun ProductSection(navControl: NavHostController) {
+fun ProductSection(navControl: NavHostController, sharedViewModel: SharedViewModel) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -72,25 +73,29 @@ fun ProductSection(navControl: NavHostController) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(productLists.size) { index ->
-            ProductItem(index, navControl)
+            ProductItem(index, navControl, sharedViewModel)
         }
     }
 }
 
 @Composable
-fun ProductItem(index: Int, navControl: NavHostController) {
+fun ProductItem(index: Int, navControl: NavHostController, sharedViewModel: SharedViewModel) {
 
     val context = LocalContext.current
 
     val product = productLists[index]
+
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(15.dp))
             .clickable {
-                Toast.makeText(context, "oke",Toast.LENGTH_SHORT).show()
-                navControl.navigate(Screens.ProductDetail.screen)
+                sharedViewModel.product = product
+
+                navControl.navigate(Screens.ProductDetail.screen){
+
+                }
             }
             .padding(8.dp),
         contentAlignment = Alignment.Center
@@ -119,7 +124,7 @@ fun ProductItem(index: Int, navControl: NavHostController) {
                     )
 
                 IconButton(
-                    onClick = { cartList.add(product) },
+                    onClick = {  },
                     modifier = Modifier
                         .padding(10.dp) // margin
 
